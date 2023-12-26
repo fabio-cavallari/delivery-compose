@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.delivery.model.Product
-import com.example.delivery.model.productList
+import com.example.delivery.model.ProductsSection
+import com.example.delivery.sampledata.sampleProductsSectionList
 import com.example.delivery.ui.components.ProductsSection
 
 @Composable
-fun HomeScreen(productList: List<Product>) {
+fun HomeScreen(productsSectionList: List<ProductsSection>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -23,10 +23,9 @@ fun HomeScreen(productList: List<Product>) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Spacer(Modifier)
-        ProductsSection(productList)
-        ProductsSection(productList)
-        ProductsSection(productList)
-        ProductsSection(productList)
+        productsSectionList.forEach { productSection ->
+            ProductsSection(productsSection = productSection)
+        }
         Spacer(Modifier)
     }
 }
@@ -34,5 +33,5 @@ fun HomeScreen(productList: List<Product>) {
 @Preview(showSystemUi = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(productList = productList)
+    HomeScreen(sampleProductsSectionList)
 }

@@ -14,13 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -28,11 +29,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.delivery.R
 import com.example.delivery.extensions.toBrazilianCurrency
 import com.example.delivery.model.Product
-import com.example.delivery.ui.theme.Purple500
-import com.example.delivery.ui.theme.Teal200
+import com.example.delivery.sampledata.sampleCandies
 import java.math.BigDecimal
 
 @Composable
@@ -51,18 +52,15 @@ fun ProductItem(product: Product) {
                 modifier = Modifier
                     .height(imageHeight)
                     .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                Purple500,
-                                Teal200
-                            )
-                        )
+                        color = MaterialTheme.colors.primary
                     )
                     .fillMaxWidth()
             ) {
-                Image(
-                    painter = painterResource(id = product.image),
+                AsyncImage(
+                    model = product.image,
                     contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(id = R.drawable.placeholder),
                     modifier = Modifier
                         .size(imageHeight)
                         .offset(y = imageHeight / 2)
@@ -93,10 +91,5 @@ fun ProductItem(product: Product) {
 @Preview(showBackground = true)
 @Composable
 fun ProductItemPreview() {
-    val product = Product(
-        name = LoremIpsum(50).values.first(),
-        price = BigDecimal("14.99"),
-        image = R.drawable.ic_launcher_background
-    )
-    ProductItem(product)
+    ProductItem(sampleCandies.first())
 }

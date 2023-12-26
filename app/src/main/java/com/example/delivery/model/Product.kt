@@ -7,6 +7,6 @@ import java.math.BigDecimal
 
 data class Product (
     val name: String,
-    @DrawableRes val image: Int,
+    val image: String? = null,
     val price: BigDecimal
 )

@@ -29,11 +29,14 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.delivery.R
+import com.example.delivery.extensions.toBrazilianCurrency
+import com.example.delivery.model.Product
 import com.example.delivery.ui.theme.Purple500
 import com.example.delivery.ui.theme.Teal200
+import java.math.BigDecimal
 
 @Composable
-fun ProductItem() {
+fun ProductItem(product: Product) {
     Surface(
         shape = RoundedCornerShape(8.dp),
         elevation = 8.dp
@@ -58,7 +61,7 @@ fun ProductItem() {
                     .fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = product.image),
                     contentDescription = null,
                     modifier = Modifier
                         .size(imageHeight)
@@ -70,14 +73,14 @@ fun ProductItem() {
             Spacer(modifier = Modifier.height(imageHeight / 2))
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = LoremIpsum(50).values.first(),
+                    text = product.name,
                     fontSize = 18.sp,
                     fontWeight = FontWeight(700),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2
                 )
                 Text(
-                    text = "R$ 14,99",
+                    text = product.price.toBrazilianCurrency(),
                     fontSize = 14.sp,
                     fontWeight = FontWeight(400),
                     modifier = Modifier.padding(8.dp)
@@ -90,5 +93,10 @@ fun ProductItem() {
 @Preview(showBackground = true)
 @Composable
 fun ProductItemPreview() {
-    ProductItem()
+    val product = Product(
+        name = LoremIpsum(50).values.first(),
+        price = BigDecimal("14.99"),
+        image = R.drawable.ic_launcher_background
+    )
+    ProductItem(product)
 }

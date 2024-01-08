@@ -3,10 +3,13 @@ package com.example.delivery.ui.components
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,18 +30,16 @@ fun ProductsSection(productsSection: ProductsSection) {
             fontWeight = FontWeight(400),
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Row(
+        LazyRow(
             modifier = Modifier
                 .padding(top = 16.dp)
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState()),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            Spacer(Modifier)
-            productsSection.products.forEach { product ->
+            items(productsSection.products) { product ->
                 ProductItem(product = product)
             }
-            Spacer(Modifier)
         }
     }
 }

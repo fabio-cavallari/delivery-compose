@@ -24,8 +24,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.delivery.model.HomeUiState
 import com.example.delivery.model.ProductsSection
+import com.example.delivery.sampledata.sampleProducts
 import com.example.delivery.sampledata.sampleProductsSectionList
 import com.example.delivery.ui.components.ProductsSection
+import com.example.delivery.ui.components.SearchProductItem
 
 @Composable
 fun HomeScreen(productsSectionList: List<ProductsSection>) {
@@ -37,7 +39,7 @@ fun HomeScreen(productsSectionList: List<ProductsSection>) {
                 searchText = newValue
             },
             modifier = Modifier
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .padding(16.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(100),
             leadingIcon = {
@@ -54,10 +56,16 @@ fun HomeScreen(productsSectionList: List<ProductsSection>) {
             modifier = Modifier
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(vertical = 16.dp)
+            contentPadding = PaddingValues(bottom = 16.dp)
         ) {
-            items(productsSectionList) { productSection ->
-                ProductsSection(productsSection = productSection)
+//            items(productsSectionList) { productSection ->
+//                ProductsSection(productsSection = productSection)
+//            }
+            items(sampleProducts) { product ->
+                SearchProductItem(
+                    product = product,
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                )
             }
         }
     }

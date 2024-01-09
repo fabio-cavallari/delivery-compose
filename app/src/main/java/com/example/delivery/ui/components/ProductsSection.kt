@@ -22,8 +22,11 @@ import com.example.delivery.model.ProductsSection
 import com.example.delivery.sampledata.sampleProductsSection1
 
 @Composable
-fun ProductsSection(productsSection: ProductsSection) {
-    Column {
+fun ProductsSection(
+    productsSection: ProductsSection,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
         Text(
             text = productsSection.title,
             fontSize = 20.sp,

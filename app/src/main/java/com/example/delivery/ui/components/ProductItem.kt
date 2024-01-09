@@ -37,8 +37,12 @@ import com.example.delivery.sampledata.sampleCandies
 import java.math.BigDecimal
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(
+    product: Product,
+    modifier: Modifier = Modifier
+) {
     Surface(
+        modifier = modifier,
         shape = RoundedCornerShape(8.dp),
         elevation = 8.dp
     ) {

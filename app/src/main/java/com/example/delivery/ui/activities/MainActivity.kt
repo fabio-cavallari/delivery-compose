@@ -1,4 +1,4 @@
-package com.example.delivery
+package com.example.delivery.ui.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 private fun App(productsSectionList: List<ProductsSection>) {
     DeliveryTheme {

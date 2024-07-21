@@ -1,16 +1,12 @@
 package com.example.delivery.ui.components
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.delivery.model.ProductsSection
-import com.example.delivery.sampledata.sampleProductsSection1
+import com.example.delivery.sampledata.sampleProductsPromotionsSection
 
 @Composable
 fun ProductsSection(
@@ -50,5 +46,5 @@ fun ProductsSection(
 @Preview(showBackground = true)
 @Composable
 fun ProductsSectionPreview() {
-    ProductsSection(sampleProductsSection1)
+    ProductsSection(sampleProductsPromotionsSection)
 }

@@ -1,6 +1,5 @@
 package com.example.delivery.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,7 +25,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -34,7 +32,6 @@ import com.example.delivery.R
 import com.example.delivery.extensions.toBrazilianCurrency
 import com.example.delivery.model.Product
 import com.example.delivery.sampledata.sampleCandies
-import java.math.BigDecimal
 
 @Composable
 fun ProductItem(

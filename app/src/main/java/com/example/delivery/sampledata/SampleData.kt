@@ -1,7 +1,6 @@
 package com.example.delivery.sampledata
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
-import com.example.delivery.R
 import com.example.delivery.model.Product
 import com.example.delivery.model.ProductsSection
 import java.math.BigDecimal
@@ -57,14 +56,14 @@ val sampleProducts: List<Product> = listOf(
         price = BigDecimal("7.99"),
         image = "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg",
         description = LoremIpsum(20).values.first()
-    ), *sampleDrinks.toTypedArray(), *sampleCandies.toTypedArray()
+    )
 )
 
-val sampleProductsSection1 = ProductsSection("Promoções", sampleProducts)
+val sampleProductsPromotionsSection = ProductsSection("Promoções", sampleProducts)
 
-val sampleProductsSection2 = ProductsSection("Doces", sampleCandies)
+val sampleProductsCandySection = ProductsSection("Doces", sampleCandies)
 
-val sampleProductsSection3 = ProductsSection("Bebidas", sampleDrinks)
+val sampleProductsDrinkSection = ProductsSection("Bebidas", sampleDrinks)
 
 val sampleProductsSectionList =
-    listOf(sampleProductsSection1, sampleProductsSection2, sampleProductsSection3)
+    listOf(sampleProductsPromotionsSection, sampleProductsCandySection, sampleProductsDrinkSection)

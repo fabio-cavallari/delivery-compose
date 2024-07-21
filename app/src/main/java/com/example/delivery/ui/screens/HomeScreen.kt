@@ -8,46 +8,31 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.delivery.model.ProductsSection
 import com.example.delivery.sampledata.sampleProductsSectionList
 import com.example.delivery.ui.components.ProductsSection
 import com.example.delivery.ui.components.SearchProductItem
 import com.example.delivery.ui.components.SearchTextField
+import com.example.delivery.ui.states.HomeScreenUiState
+import com.example.delivery.viewmodels.HomeScreenViewModel
+
+
+@Composable
+fun HomeScreen(viewModel: HomeScreenViewModel) {
+    val state = viewModel.uiState
+    HomeScreen(state)
+}
 
 @Composable
 fun HomeScreen(
-    productsSectionList: List<ProductsSection>,
-    searchText: String = ""
+    state: HomeScreenUiState
 ) {
     Column {
-        var text by remember {
-            mutableStateOf(searchText)
-        }
-        val products = remember {
-            productsSectionList.flatMap { productSection ->
-                productSection.products
-            }
-        }
-        val searchedProducts = remember(text) {
-            products.filter { product ->
-                product.name.contains(text, true) || product.description?.contains(
-                    text,
-                    true
-                ) ?: false
-            }
-        }
         SearchTextField(
-            searchText = text,
-            onSearchTextChange = {
-                text = it
-            }
+            searchText = state.text,
+            onSearchTextChange = state.onSearchTextChange
         )
         LazyColumn(
             modifier = Modifier
@@ -55,12 +40,14 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(bottom = 16.dp)
         ) {
-            if (text.isBlank()) {
-                items(productsSectionList) { productSection ->
-                    ProductsSection(productsSection = productSection)
+            if (state.showSections()) {
+                items(state.productsSectionList) { productSection ->
+                    if (productSection.products.isNotEmpty()) {
+                        ProductsSection(productsSection = productSection)
+                    }
                 }
             } else {
-                items(searchedProducts) { product ->
+                items(state.searchedProducts) { product ->
                     SearchProductItem(
                         product = product,
                         modifier = Modifier.padding(horizontal = 16.dp),
@@ -74,11 +61,11 @@ fun HomeScreen(
 @Preview(showSystemUi = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(sampleProductsSectionList)
+    HomeScreen(HomeScreenUiState(sampleProductsSectionList))
 }
 
 @Preview(showSystemUi = true)
 @Composable
 fun HomeScreenWithSearchTextPreview() {
-    HomeScreen(sampleProductsSectionList, "pizza")
+    HomeScreen(HomeScreenUiState(sampleProductsSectionList, ""))
 }
